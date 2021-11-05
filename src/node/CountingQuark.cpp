@@ -6,21 +6,17 @@
 
 #include <iostream>
 
-namespace node::component {
-    void CountingQuark::RunFrame() {
-        this->x++;
-        std::cout << x;
-    }
-
-    void CountingQuark::Init() {
-        this->x = 0;
-    }
-
-    void CountingQuark::RunPhysics() {
-
-    }
-
-    void CountingQuark::DeInit() {
-
-    }
+void node::quark::CountingQuark::RunFrame(node::Node *node) {
+    this->x++;
+    std::cout << x;
 }
+
+void node::quark::CountingQuark::Init(node::Node *node) {
+    this->x = 0;
+}
+
+void node::quark::CountingQuark::RunPhysics(node::Node *node) {
+
+}
+
+node::quark::CountingQuark::~CountingQuark() = default;

@@ -5,8 +5,6 @@
 #ifndef QUARK_NODE_H
 #define QUARK_NODE_H
 
-#include "Quark.h"
-
 #include <memory>
 #include <vector>
 #include <iterator>
@@ -14,11 +12,19 @@
 #include <iostream>
 
 namespace node {
+    namespace quark {
+        class Quark;
+    }
     class Node {
     public:
         template<class T>
         std::weak_ptr<T> GetNode() {
-
+            for (const auto &quark: this->quarks) {
+                if (dynamic_cast<T *>(quark.get())) {
+                    return std::weak_ptr(quark);
+                }
+            }
+            return {};
         }
 
         std::vector<std::shared_ptr<Node>> *GetChildren();
@@ -26,21 +32,21 @@ namespace node {
         void Init();
 
         template<class T>
-        void AddComponent() {
-            this->RemoveComponent<T>();
+        void AddQuark() {
+            this->RemoveQuark<T>();
 
-            std::shared_ptr<component::Quark> component(new T());
+            std::shared_ptr<quark::Quark> quark(new T());
 
-            this->AddComponent(component);
+            this->AddQuark(quark);
         }
 
         template<class T>
-        void RemoveComponent() {
-            auto iter = this->components.begin();
+        void RemoveQuark() {
+            auto iter = this->quarks.begin();
 
-            while (iter != this->components.end()) {
-                if (dynamic_cast<T*>(iter->get())) {
-                    this->components.erase(iter);
+            while (iter != this->quarks.end()) {
+                if (dynamic_cast<T *>(iter->get())) {
+                    this->quarks.erase(iter);
                 } else {
                     iter++;
                 }
@@ -51,11 +57,15 @@ namespace node {
 
         void Physics();
 
-    private:
-        void AddComponent(const std::shared_ptr<node::component::Quark> &component);
+        bool WantsDeletion() const;
 
-        std::vector<std::shared_ptr<node::component::Quark>> components;
+    private:
+        void AddQuark(const std::shared_ptr<quark::Quark> &component);
+
+        std::vector<std::shared_ptr<quark::Quark>> quarks;
         std::vector<std::shared_ptr<Node>> children;
+
+        bool wantsDeletion = false;
     };
 }
 

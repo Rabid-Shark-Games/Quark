@@ -5,13 +5,18 @@
 #ifndef QUARK_QUARK_H
 #define QUARK_QUARK_H
 
-namespace node::component {
+#include "Node.h"
+
+namespace node::quark {
     class Quark {
     public:
-        virtual void RunFrame() = 0;
-        virtual void RunPhysics() = 0;
-        virtual void DeInit() = 0;
-        virtual void Init() = 0;
+        virtual ~Quark() = default;
+
+        virtual void RunFrame(node::Node *node) = 0;
+
+        virtual void RunPhysics(node::Node *node) = 0;
+
+        virtual void Init(node::Node *node) = 0;
     };
 }
 

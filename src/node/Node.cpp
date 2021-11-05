@@ -3,30 +3,49 @@
 //
 
 #include "Node.h"
+#include "Quark.h"
 
-namespace node {
-    std::vector<std::shared_ptr<Node>> *Node::GetChildren() {
-        return nullptr;
+std::vector<std::shared_ptr<node::Node>> *node::Node::GetChildren() {
+    return nullptr;
+}
+
+void node::Node::Init() {
+
+}
+
+void node::Node::AddQuark(const std::shared_ptr<node::quark::Quark> &quark) {
+    quark->Init(this);
+    this->quarks.push_back(quark);
+}
+
+void node::Node::Physics() {
+    for (const auto &quark: this->quarks) {
+        quark->RunPhysics(this);
     }
-
-    void Node::Init() {
-
-    }
-
-    void Node::AddComponent(const std::shared_ptr<node::component::Quark> &component) {
-        component->Init();
-        this->components.push_back(component);
-    }
-
-    void Node::Physics() {
-        for (const auto &component: this->components) {
-            component->RunPhysics();
+    auto iter = this->children.begin();
+    while (iter != this->children.end()) {
+        if (iter->get()->WantsDeletion()) {
+            this->children.erase(iter);
+        } else {
+            iter->get()->Physics();
         }
     }
+}
 
-    void Node::Frame() {
-        for (const auto &component: this->components) {
-            component->RunFrame();
+void node::Node::Frame() {
+    for (const auto &component: this->quarks) {
+        component->RunFrame(this);
+    }
+    auto iter = this->children.begin();
+    while (iter != this->children.end()) {
+        if (iter->get()->WantsDeletion()) {
+            this->children.erase(iter);
+        } else {
+            iter->get()->Frame();
         }
     }
+}
+
+bool node::Node::WantsDeletion() const {
+    return this->wantsDeletion;
 }

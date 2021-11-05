@@ -7,17 +7,16 @@
 
 #include "Quark.h"
 
-namespace node::component {
+namespace node::quark {
     class CountingQuark : public Quark {
     public:
-        void RunFrame() override;
+        void RunFrame(Node *node) override;
 
-        void Init() override;
+        void Init(Node *node) override;
 
-    private:
-        void RunPhysics() override;
+        void RunPhysics(Node *node) override;
 
-        void DeInit() override;
+        ~CountingQuark() override;
 
     private:
         int x = 0;

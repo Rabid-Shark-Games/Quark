@@ -2,22 +2,23 @@
 // Created by creeper on 11/4/21.
 //
 
-#include "node/Node.h"
-#include "node/CountingQuark.h"
-
-#include <iostream>
+#include <memory>
+#include "windowing/Window.h"
 
 int main() {
-    node::Node node;
-    node.Init();
-    node.AddComponent<node::component::CountingQuark>();
+    std::unique_ptr<windowing::Window> window;
 
-    for (int x = 1; x <= 10; x++) {
-        node.Frame();
-        if (x % 8 == 0) {
-            node.RemoveComponent<node::component::CountingQuark>();
-        }
+    {
+        windowing::WindowProperties properties {
+                800,
+                600,
+                "Quark"
+        };
+
+        window = std::make_unique<windowing::Window>(properties);
     }
+
+    window->Run();
 
     return 0;
 }
