@@ -5,7 +5,7 @@
 #ifndef QUARK_CUBEQUARK_H
 #define QUARK_CUBEQUARK_H
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include "Quark.h"
 
 namespace node::quark {

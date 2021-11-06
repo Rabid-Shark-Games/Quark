@@ -6,7 +6,6 @@
 #include "../node/CameraQuark.h"
 
 windowing::Window::Window(const windowing::WindowProperties &props) {
-    glewExperimental = true;
     if (!glfwInit()) {
         return;
     }
@@ -26,8 +25,7 @@ windowing::Window::Window(const windowing::WindowProperties &props) {
 
     glfwMakeContextCurrent(this->window.get());
 
-    glewExperimental = true;
-    if (glewInit() != GLEW_OK) {
+    if (!gladLoadGL()) {
         return;
     }
 }
