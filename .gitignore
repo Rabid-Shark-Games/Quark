@@ -49,6 +49,4 @@ _deps
 # CLion
 .idea
 
-libs/gl3w/include
-libs/gl3w/src
-!libs/glfw/lib/*
+!libs/glew/lib/**/**

@@ -6,10 +6,7 @@
 #include "../node/CameraQuark.h"
 
 windowing::Window::Window(const windowing::WindowProperties &props) {
-    if (!gl3wInit()) {
-        return;
-    }
-
+    glewExperimental = true;
     if (!glfwInit()) {
         return;
     }
@@ -26,14 +23,19 @@ windowing::Window::Window(const windowing::WindowProperties &props) {
             nullptr,
             nullptr
     ));
+
+    glfwMakeContextCurrent(this->window.get());
+
+    glewExperimental = true;
+    if (glewInit() != GLEW_OK) {
+        return;
+    }
 }
 
 void windowing::Window::Run() {
     if (!this->window) {
         return;
     }
-
-    glfwMakeContextCurrent(this->window.get());
 
     while (!glfwWindowShouldClose(this->window.get())) {
         if (!this->world.GetCurrentCamera().expired()) {

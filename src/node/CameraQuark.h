@@ -7,7 +7,7 @@
 
 #include "Quark.h"
 
-#include <GL/gl3w.h>
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 namespace node::quark {
