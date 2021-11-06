@@ -10,11 +10,11 @@
 namespace node::quark {
     class CountingQuark : public Quark {
     public:
-        void RunFrame(Node *node) override;
+        void RunFrame(std::weak_ptr<node::Node> node) override;
 
-        void Init(Node *node) override;
+        void Init(std::weak_ptr<node::Node> node) override;
 
-        void RunPhysics(Node *node) override;
+        void RunPhysics(std::weak_ptr<node::Node> node) override;
 
         ~CountingQuark() override;
 

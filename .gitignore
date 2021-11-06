@@ -48,3 +48,6 @@ _deps
 
 # CLion
 .idea
+
+libs/gl3w/**/**
+!libs/gl3w/gl3w_gen.py

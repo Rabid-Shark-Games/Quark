@@ -4,15 +4,15 @@
 
 #include "AudioQuark.h"
 
-void node::quark::AudioQuark::RunFrame(Node *node) {
+void node::quark::AudioQuark::RunFrame(std::weak_ptr<node::Node> node) {
 
 }
 
-void node::quark::AudioQuark::Init(Node *node) {
+void node::quark::AudioQuark::Init(std::weak_ptr<node::Node> node) {
 
 }
 
-void node::quark::AudioQuark::RunPhysics(Node *node) {
+void node::quark::AudioQuark::RunPhysics(std::weak_ptr<node::Node> node) {
 
 }
 

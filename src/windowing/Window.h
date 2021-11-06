@@ -5,8 +5,11 @@
 #ifndef QUARK_WINDOW_H
 #define QUARK_WINDOW_H
 
+#include "../node/World.h"
+
 #include <string>
 #include <memory>
+#include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
 
 namespace windowing {
@@ -29,8 +32,11 @@ namespace windowing {
         ~Window();
 
         void Run();
+
+        node::World *GetWorld();
     private:
         std::unique_ptr<GLFWwindow, GLFWwindowDestroyer> window = {};
+        node::World world;
     };
 }
 

@@ -6,16 +6,16 @@
 
 #include <iostream>
 
-void node::quark::CountingQuark::RunFrame(node::Node *node) {
+void node::quark::CountingQuark::RunFrame(std::weak_ptr<node::Node> node) {
     this->x++;
     std::cout << x;
 }
 
-void node::quark::CountingQuark::Init(node::Node *node) {
+void node::quark::CountingQuark::Init(std::weak_ptr<node::Node> node) {
     this->x = 0;
 }
 
-void node::quark::CountingQuark::RunPhysics(node::Node *node) {
+void node::quark::CountingQuark::RunPhysics(std::weak_ptr<node::Node> node) {
 
 }
 

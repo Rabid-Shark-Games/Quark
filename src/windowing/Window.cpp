@@ -3,11 +3,21 @@
 //
 
 #include "Window.h"
+#include "../node/CameraQuark.h"
 
-windowing::Window::Window(const windowing::WindowProperties& props) {
+windowing::Window::Window(const windowing::WindowProperties &props) {
+    if (!gl3wInit()) {
+        return;
+    }
+
     if (!glfwInit()) {
         return;
     }
+
+//    glfwWindowHint(GLFW_SAMPLES, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     this->window = std::unique_ptr<GLFWwindow, GLFWwindowDestroyer>(glfwCreateWindow(
             props.width,
@@ -26,11 +36,17 @@ void windowing::Window::Run() {
     glfwMakeContextCurrent(this->window.get());
 
     while (!glfwWindowShouldClose(this->window.get())) {
-        glClearColor(0.03, 0.17, 0.53, 1.0);
+        if (!this->world.GetCurrentCamera().expired()) {
+            this->world.GetCurrentCamera().lock()->GetQuark<node::quark::CameraQuark>().lock()->CameraBegin(
+                    this->window.get());
+        }
 
-        glClear(GL_COLOR_BUFFER_BIT);
+        this->world.Process();
 
-        glfwSwapBuffers(this->window.get());
+        if (!this->world.GetCurrentCamera().expired()) {
+            this->world.GetCurrentCamera().lock()->GetQuark<node::quark::CameraQuark>().lock()->CameraEnd(
+                    this->window.get());
+        }
 
         glfwPollEvents();
     }
@@ -38,4 +54,8 @@ void windowing::Window::Run() {
 
 windowing::Window::~Window() {
     glfwTerminate();
+}
+
+node::World *windowing::Window::GetWorld() {
+    return &this->world;
 }

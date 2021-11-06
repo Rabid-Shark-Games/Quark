@@ -12,11 +12,11 @@ namespace node::quark {
     public:
         virtual ~Quark() = default;
 
-        virtual void RunFrame(node::Node *node) = 0;
+        virtual void RunFrame(std::weak_ptr<node::Node> node) = 0;
 
-        virtual void RunPhysics(node::Node *node) = 0;
+        virtual void RunPhysics(std::weak_ptr<node::Node> node) = 0;
 
-        virtual void Init(node::Node *node) = 0;
+        virtual void Init(std::weak_ptr<node::Node> node) = 0;
     };
 }
 

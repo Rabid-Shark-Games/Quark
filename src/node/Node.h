@@ -12,16 +12,21 @@
 #include <iostream>
 
 namespace node {
+    class World;
+
     namespace quark {
         class Quark;
     }
-    class Node {
+
+    class Node : public std::enable_shared_from_this<Node> {
     public:
+        Node(World *world);
+
         template<class T>
-        std::weak_ptr<T> GetNode() {
+        std::weak_ptr<T> GetQuark() {
             for (const auto &quark: this->quarks) {
                 if (dynamic_cast<T *>(quark.get())) {
-                    return std::weak_ptr(quark);
+                    return std::weak_ptr<T>(std::dynamic_pointer_cast<T>(quark));
                 }
             }
             return {};
@@ -59,6 +64,8 @@ namespace node {
 
         bool WantsDeletion() const;
 
+        World *GetWorld();
+
     private:
         void AddQuark(const std::shared_ptr<quark::Quark> &component);
 
@@ -66,6 +73,8 @@ namespace node {
         std::vector<std::shared_ptr<Node>> children;
 
         bool wantsDeletion = false;
+
+        World *world;
     };
 }
 
