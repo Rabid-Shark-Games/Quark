@@ -5,8 +5,12 @@ execute_process(COMMAND python gl3w_gen.py --root ${PROJECT_BINARY_DIR}/libs/gl3
 project(Quark)
 
 include_directories(libs/gl3w/include)
-include_directories(libs/glfw/include)
-link_directories(libs/glfw/lib)
+
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+add_subdirectory(glfw)
 
 link_libraries(glfw dl)
 
