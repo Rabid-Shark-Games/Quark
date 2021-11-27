@@ -4,6 +4,6 @@
 
 #include "World.h"
 
-void world::World::delete_object(int id) {
-    objects.erase(id);
+void world::World::deleteObject(int id) {
+	objects.erase(id);
 }

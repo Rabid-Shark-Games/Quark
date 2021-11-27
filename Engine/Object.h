@@ -5,10 +5,12 @@
 #ifndef QUARK_OBJECT_H
 #define QUARK_OBJECT_H
 
-namespace object {
-    class Object {
-        int id;
-    };
+namespace object
+{
+	class Object
+	{
+		int id;
+	};
 }
 
 #endif //QUARK_OBJECT_H

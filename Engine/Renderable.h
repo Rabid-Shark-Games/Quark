@@ -9,13 +9,15 @@
 #ifndef QUARK_RENDERABLE_H
 #define QUARK_RENDERABLE_H
 
-namespace renderable {
-class Renderable: public object::Object {
-            public:
-            std::vector<float> verticies;
-            std::vector<uint32_t> indicies;
-            world::location location;
-    };
+namespace renderable
+{
+	class Renderable : public object::Object
+	{
+	public:
+		std::vector<float> verticies;
+		std::vector<uint32_t> indicies;
+		world::location location;
+	};
 }
 
 #endif //QUARK_RENDERABLE_H

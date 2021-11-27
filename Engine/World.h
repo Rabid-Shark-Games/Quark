@@ -11,21 +11,22 @@
 #ifndef QUARK_WORLD_H
 #define QUARK_WORLD_H
 
-namespace world {
+namespace world
+{
+	struct Location {
+		glm::vec3 position;
+		glm::quat rotation;
+		glm::vec3 scaling;
+	};
 
-    struct location {
-        glm::vec3 position;
-        glm::quat rotation;
-        glm::vec3 scaling;
-    };
+	class World
+	{
+	public:
+		Location camera_position;
+		std::map<int, object::Object> objects;
 
-    class World {
-    public:
-        world::location camera_position;
-        std::map<int, object::Object> objects;
-
-        void delete_object(int id);
-    };
+		void deleteObject(int id);
+	};
 }
 
 #endif //QUARK_WORLD_H
