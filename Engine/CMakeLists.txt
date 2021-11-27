@@ -1,0 +1,1 @@
+target_sources (Quark PRIVATE Engine/World.cpp Engine/World.h Engine/Object.cpp Engine/Object.h)
