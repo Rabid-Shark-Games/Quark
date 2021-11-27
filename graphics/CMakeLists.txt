@@ -1,0 +1,1 @@
+target_sources (Quark PRIVATE "graphics/Graphics.hpp" "graphics/Graphics.cpp")
