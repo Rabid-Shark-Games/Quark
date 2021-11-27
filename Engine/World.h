@@ -16,6 +16,7 @@ namespace world {
     struct location {
         glm::vec3 position;
         glm::quat rotation;
+        glm::vec3 scaling;
     };
 
     class World {
