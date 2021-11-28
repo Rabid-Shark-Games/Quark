@@ -3,7 +3,6 @@
 //
 
 #include "MeshBuilder.h"
-#include "glm/glm.hpp"
 
 void meshBuilder::MeshBuilder::begin(meshBuilder::Mode start_mode) {
     mode = start_mode;
@@ -11,10 +10,6 @@ void meshBuilder::MeshBuilder::begin(meshBuilder::Mode start_mode) {
 
 void meshBuilder::MeshBuilder::addVertex(glm::vec3 vertex) {
     temp.emplace_back(vertex);
-}
-
-void meshBuilder::MeshBuilder::indexVerticies() {
-
 }
 
 void meshBuilder::MeshBuilder::commit() {

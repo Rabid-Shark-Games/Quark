@@ -23,8 +23,6 @@ namespace meshBuilder {
 
         void addVertex(glm::vec3 vertex);
 
-        void indexVerticies();
-
         void commit();
     };
 }
