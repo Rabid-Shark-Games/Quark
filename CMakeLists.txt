@@ -12,4 +12,4 @@ add_executable (Quark main.cpp)
 add_subdirectory (engine)
 add_subdirectory (graphics)
 
-target_link_libraries (Quark PRIVATE SDL2::SDL2 SDL2::SDL2main glm::glm Boost::boost Boost::uuid)
+target_link_libraries (Quark PRIVATE SDL2::SDL2 SDL2::SDL2main glm::glm Boost::boost)

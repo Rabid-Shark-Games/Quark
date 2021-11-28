@@ -1,1 +1,1 @@
-target_sources (Quark PRIVATE Engine/World.cpp Engine/World.h Engine/Object.cpp Engine/Object.h)
+target_sources (Quark PRIVATE Engine/World.cpp Engine/World.h Engine/Object.cpp Engine/Object.h Engine/Renderable.cpp Engine/Renderable.h Engine/Mesh.cpp Engine/Mesh.h Engine/MeshBuilder.h Engine/MeshBuilder.cpp)
